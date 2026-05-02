@@ -3,30 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nambar Information CTH</title>
+    <title>Nambar Information CTH | SHADOW JOKER</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary: #00d2ff;
             --secondary: #3a7bd5;
             --bg-dark: #060918;
-            --text-glow: 0 0 10px rgba(0, 210, 255, 0.8);
+            --card-bg: rgba(255, 255, 255, 0.07);
+            --glow: 0 0 15px rgba(0, 210, 255, 0.5);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Poppins', sans-serif;
             background: var(--bg-dark);
             color: white;
-            overflow-x: hidden;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
+            overflow-x: hidden;
         }
 
-        /* Animated Background Particles */
+        /* Live Background Animation */
         #bg-animation {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -34,54 +35,63 @@
             background: radial-gradient(circle at center, #111d35 0%, #060918 100%);
         }
 
+        .floating-circle {
+            position: absolute;
+            background: rgba(0, 210, 255, 0.1);
+            border-radius: 50%;
+            filter: blur(60px);
+            z-index: -1;
+            animation: float 15s infinite alternate ease-in-out;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(60px, 120px) scale(1.2); }
+        }
+
         .container {
             width: 90%;
             max-width: 450px;
             padding: 30px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(15px);
-            border-radius: 24px;
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border-radius: 28px;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
             text-align: center;
-            animation: slideUp 0.8s ease-out;
+            animation: fadeIn 1s ease;
         }
 
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
         h1 {
             font-size: 1.8rem;
             background: linear-gradient(to right, #00d2ff, #91eaff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 5px;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            filter: drop-shadow(var(--text-glow));
+            letter-spacing: 1px;
+            margin-bottom: 5px;
         }
 
         .credit {
             font-size: 0.8rem;
             color: #ffcc00;
-            margin-bottom: 25px;
             font-weight: bold;
-            letter-spacing: 1px;
+            margin-bottom: 25px;
+            display: block;
         }
 
-        .input-box {
-            position: relative;
+        .input-group {
             margin-bottom: 20px;
         }
 
         input {
             width: 100%;
-            padding: 15px 20px;
-            background: rgba(0, 0, 0, 0.3);
-            border: 2px solid #334155;
-            border-radius: 12px;
+            padding: 14px 20px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid #2d3748;
+            border-radius: 14px;
             color: white;
             font-size: 1rem;
             outline: none;
@@ -90,7 +100,7 @@
 
         input:focus {
             border-color: var(--primary);
-            box-shadow: 0 0 15px rgba(0, 210, 255, 0.3);
+            box-shadow: var(--glow);
         }
 
         button {
@@ -98,173 +108,195 @@
             padding: 15px;
             background: linear-gradient(45deg, var(--secondary), var(--primary));
             border: none;
-            border-radius: 12px;
+            border-radius: 14px;
             color: white;
             font-weight: bold;
             font-size: 1rem;
             cursor: pointer;
-            transition: 0.4s;
+            transition: 0.3s;
             text-transform: uppercase;
         }
 
-        button:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 20px rgba(0, 210, 255, 0.5);
-        }
+        button:hover { transform: translateY(-2px); box-shadow: var(--glow); }
+        button:disabled { opacity: 0.6; cursor: not-allowed; }
 
-        /* Loading Spinner */
+        /* Loader Animation */
         .loader {
             display: none;
             margin: 20px auto;
-            border: 4px solid rgba(255,255,255,0.1);
+            border: 3px solid rgba(255,255,255,0.1);
             border-left-color: var(--primary);
             border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            animation: spin 1s linear infinite;
+            width: 35px; height: 35px;
+            animation: spin 0.8s linear infinite;
         }
-
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        /* Result Section */
+        /* Info Display Card */
         #result {
-            margin-top: 25px;
             display: none;
+            margin-top: 25px;
             text-align: left;
-            animation: fadeIn 0.5s;
+            animation: slideIn 0.5s ease;
         }
 
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideIn { from { opacity: 0; scale: 0.9; } to { opacity: 1; scale: 1; } }
 
-        .info-card {
-            background: rgba(0, 0, 0, 0.2);
-            padding: 15px;
-            border-radius: 12px;
-            border-left: 4px solid var(--primary);
+        .info-box {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 18px;
+            border-left: 5px solid var(--primary);
         }
 
-        .info-item {
-            margin-bottom: 10px;
+        .row {
             display: flex;
             justify-content: space-between;
+            padding: 10px 0;
             border-bottom: 1px solid rgba(255,255,255,0.05);
-            padding-bottom: 5px;
         }
 
-        .label { color: #94a3b8; font-size: 0.9rem; }
-        .val { color: #e2e8f0; font-weight: 500; }
+        .label { color: #94a3b8; font-size: 0.85rem; }
+        .val { color: #fff; font-weight: 500; text-align: right; }
+        .val.name { color: #00ffcc; font-weight: bold; }
 
-        .telegram-btn {
-            display: inline-block;
-            margin-top: 20px;
-            color: #00d2ff;
-            text-decoration: none;
-            font-size: 0.9rem;
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .social-icons a {
+            font-size: 1.5rem;
             transition: 0.3s;
         }
 
-        .telegram-btn:hover { color: white; text-shadow: var(--text-glow); }
+        .social-icons a:hover { transform: scale(1.2); }
 
-        /* Background Animation Circles */
-        .circle {
-            position: absolute;
-            background: rgba(0, 210, 255, 0.1);
-            border-radius: 50%;
-            filter: blur(50px);
-            z-index: -1;
-            animation: float 10s infinite alternate;
+        .telegram-link {
+            display: block;
+            margin-top: 25px;
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            opacity: 0.8;
         }
 
-        @keyframes float {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(50px, 100px); }
+        .telegram-link:hover { opacity: 1; text-decoration: underline; }
+
+        details {
+            margin-top: 15px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 8px;
+            padding: 5px;
         }
+        summary { font-size: 0.7rem; color: #4a5568; cursor: pointer; }
+        pre { font-size: 9px; color: #4ade80; overflow-x: auto; margin-top: 10px; }
     </style>
 </head>
 <body>
 
     <div id="bg-animation">
-        <div class="circle" style="width: 300px; height: 300px; top: -10%; left: -10%;"></div>
-        <div class="circle" style="width: 250px; height: 250px; bottom: -5%; right: -5%; background: rgba(58, 123, 213, 0.15);"></div>
+        <div class="floating-circle" style="width: 300px; height: 300px; top: -10%; left: -10%;"></div>
+        <div class="floating-circle" style="width: 200px; height: 200px; bottom: 10%; right: 5%; background: rgba(58, 123, 213, 0.2);"></div>
     </div>
 
     <div class="container">
         <h1>Nambar Information</h1>
-        <p class="credit">Credit: SHADOW JOKER CTH</p>
+        <span class="credit">Credit: SHADOW JOKER CTH</span>
 
-        <div class="input-box">
-            <input type="text" id="phoneNumber" placeholder="Enter Number (017...)">
+        <div class="input-group">
+            <input type="text" id="phoneInput" placeholder="Enter Number (017...)">
         </div>
 
-        <button onclick="fetchInfo()" id="searchBtn">
-            <i class="fa-solid fa-magnifying-glass"></i> Search Information
+        <button onclick="searchNumber()" id="btnMain">
+            <i class="fa-solid fa-bolt"></i> Get Information
         </button>
 
         <div class="loader" id="loader"></div>
 
         <div id="result">
-            <div class="info-card">
-                <div class="info-item">
+            <div class="info-box">
+                <div class="row">
                     <span class="label">Name:</span>
-                    <span id="resName" class="val"></span>
+                    <span id="resName" class="val name"></span>
                 </div>
-                <div class="info-item">
+                <div class="row">
+                    <span class="label">Carrier:</span>
+                    <span id="resCarrier" class="val"></span>
+                </div>
+                <div class="row">
                     <span class="label">Number:</span>
                     <span id="resNum" class="val"></span>
                 </div>
-                <div class="info-item">
-                    <span class="label">Country:</span>
-                    <span id="resCountry" class="val"></span>
+                <div class="row">
+                    <span class="label">Location:</span>
+                    <span id="resLocation" class="val"></span>
+                </div>
+
+                <div class="social-icons">
+                    <a id="waLink" href="#" target="_blank" style="color: #25d366;"><i class="fa-brands fa-whatsapp"></i></a>
+                    <a id="tgLink" href="#" target="_blank" style="color: #24A1DE;"><i class="fa-brands fa-telegram"></i></a>
                 </div>
             </div>
-            <pre id="jsonRaw" style="font-size: 10px; color: #4ade80; margin-top: 15px; background: rgba(0,0,0,0.4); padding: 10px; border-radius: 8px; overflow-x: auto;"></pre>
+
+            <details>
+                <summary>View Raw JSON</summary>
+                <pre id="jsonOut"></pre>
+            </details>
         </div>
 
-        <a href="https://t.me/SHADOW_JOKER_CTH" target="_blank" class="telegram-btn">
-            <i class="fa-brands fa-telegram"></i> Contact: @SHADOW_JOKER_CTH
+        <a href="https://t.me/SHADOW_JOKER_CTH" target="_blank" class="telegram-link">
+            <i class="fa-brands fa-telegram"></i> @SHADOW_JOKER_CTH
         </a>
     </div>
 
     <script>
-        async function fetchInfo() {
-            const num = document.getElementById('phoneNumber').value;
+        async function searchNumber() {
+            const input = document.getElementById('phoneInput').value;
+            const btn = document.getElementById('btnMain');
             const loader = document.getElementById('loader');
-            const result = document.getElementById('result');
-            const btn = document.getElementById('searchBtn');
+            const resultDiv = document.getElementById('result');
 
-            if (!num) {
-                alert("Please enter a phone number!");
-                return;
-            }
+            if (!input) return alert("দয়া করে একটি নাম্বার দিন!");
 
-            // Start Loading
+            // UI State Change
             loader.style.display = "block";
-            result.style.display = "none";
+            resultDiv.style.display = "none";
             btn.disabled = true;
-            btn.style.opacity = "0.7";
 
             try {
-                // আপনার api/index.py এর রুটে রিকোয়েস্ট পাঠানো হচ্ছে
-                const response = await fetch(`/api/check?number=${num}`);
+                // আপনার index.py এপিআই রুটে কল করা হচ্ছে
+                const response = await fetch(`/api/check?number=${input}`);
                 const data = await response.json();
 
-                if (data && data.status !== "error") {
-                    document.getElementById('resName').innerText = data.name || "Unknown";
-                    document.getElementById('resNum').innerText = data.number || num;
-                    document.getElementById('resCountry').innerText = data.country || "Bangladesh";
-                    document.getElementById('jsonRaw').innerText = JSON.stringify(data, null, 2);
+                if (data && data.ok === true && data.results) {
+                    const info = data.results;
                     
-                    result.style.display = "block";
+                    // ডেটা পপুলেট করা
+                    document.getElementById('resName').innerText = info.name || "Unknown";
+                    document.getElementById('resCarrier').innerText = info.carrier || "N/A";
+                    document.getElementById('resNum').innerText = info.number || input;
+                    document.getElementById('resLocation').innerText = info.location || "Bangladesh";
+                    
+                    // সোশ্যাল লিঙ্ক হ্যান্ডেল করা
+                    if(info.social) {
+                        document.getElementById('waLink').href = info.social.whatsapp || "#";
+                        document.getElementById('tgLink').href = info.social.telegram || "#";
+                    }
+
+                    document.getElementById('jsonOut').innerText = JSON.stringify(data, null, 2);
+                    resultDiv.style.display = "block";
                 } else {
-                    alert("No information found for this number.");
+                    alert("কোনো তথ্য পাওয়া যায়নি!");
                 }
-            } catch (error) {
-                console.error(error);
-                alert("API Connection Error! Check back-end.");
+            } catch (err) {
+                alert("সার্ভার এরর! আবার চেষ্টা করুন।");
+                console.error(err);
             } finally {
                 loader.style.display = "none";
                 btn.disabled = false;
-                btn.style.opacity = "1";
             }
         }
     </script>
