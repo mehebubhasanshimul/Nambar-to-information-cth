@@ -5,11 +5,13 @@ import os
 
 app = FastAPI()
 
+# আপনার API Key এখানে রাখা হলো
+API_KEY = "pk_live_8314066e3876952986f7175223152842d3316b37"
+
 # ১. হোম রুট: এটি আপনার index.html ফাইলটি লোড করবে
 @app.get("/", response_class=HTMLResponse)
 async def read_root():
     try:
-        # রুট ডিরেক্টরিতে থাকা index.html ফাইলটি পড়ার চেষ্টা করবে
         file_path = os.path.join(os.getcwd(), "index.html")
         with open(file_path, "r", encoding="utf-8") as f:
             return f.read()
@@ -31,25 +33,29 @@ async def check_number(number: str):
     if not number:
         raise HTTPException(status_code=400, detail="Number is required")
     
-    # টার্গেট এপিআই ইউআরএল
-    target_url = f"https://sbsakib.eu.cc/apis/truecaller?key=Test&number1={number}"
+    # নতুন এপিআই ইউআরএল এবং কী সেটআপ
+    target_url = f"https://api.lookupnow.top/api/v1/query.php?key={API_KEY}&number={number}"
     
     async with httpx.AsyncClient() as client:
         try:
             # এপিআই থেকে ডেটা সংগ্রহ
-            response = await client.get(target_url, timeout=10.0)
+            response = await client.get(target_url, timeout=15.0)
             
-            # যদি এপিআই থেকে সফল রেসপন্স আসে
             if response.status_code == 200:
+                # সরাসরি এপিআই থেকে পাওয়া JSON ডাটা রিটার্ন করবে
                 return response.json()
             else:
-                return {"status": "error", "message": "API server returned an error"}
+                return {
+                    "status": "error", 
+                    "message": f"API server returned status code {response.status_code}"
+                }
                 
+        except httpx.RequestError as exc:
+            return {"status": "error", "message": f"An error occurred while requesting: {exc}"}
         except Exception as e:
-            # কোনো কানেকশন এরর হলে
             return {"status": "error", "message": str(e)}
 
-# ৩. হেলথ চেক রুট (অপশনাল)
+# ৩. প্রজেক্ট স্ট্যাটাস চেক
 @app.get("/status")
 async def status():
-    return {"status": "online", "project": "Cyber Team Help"}
+    return {"status": "online", "project": "Cyber Team Help", "api_provider": "LookupNow"}
