@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nambar Information CTH | SHADOW JOKER</title>
+    <title>Number Information CTH | SHADOW JOKER</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary: #00d2ff;
             --secondary: #3a7bd5;
             --hack-green: #00ff00;
-            --bg-hack: url('https://media.giphy.com/media/QKDpE67Rc7rpjBmQPj/giphy.gif'); /* হ্যাকিং ব্যাকগ্রাউন্ড GIF */
-            --card-bg: rgba(0, 0, 0, 0.7);
+            --bg-hack: url('https://media.giphy.com/media/QKDpE67Rc7rpjBmQPj/giphy.gif');
+            --card-bg: rgba(0, 0, 0, 0.85);
             --glow: 0 0 15px rgba(0, 210, 255, 0.6);
             --hack-glow: 0 0 10px rgba(0, 255, 0, 0.6);
         }
@@ -27,251 +27,133 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow-x: hidden;
             color: #fff;
+            padding: 20px;
         }
 
         .container {
-            width: 90%;
+            width: 100%;
             max-width: 480px;
             padding: 30px;
             background: var(--card-bg);
             border-radius: 28px;
             border: 2px solid #1a2a4a;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(0, 210, 255, 0.2);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
             text-align: center;
-            position: relative;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(10px);
             animation: containerGlow 4s infinite alternate;
         }
 
         @keyframes containerGlow {
-            0% { box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(0, 210, 255, 0.2); border-color: #1a2a4a; }
-            100% { box-shadow: 0 20px 50px rgba(0, 210, 255, 0.4), inset 0 0 30px rgba(0, 210, 255, 0.4); border-color: var(--primary); }
+            0% { border-color: #1a2a4a; }
+            100% { border-color: var(--primary); }
         }
 
-        /* GIF লোগো */
         .logo-gif {
-            width: 90px;
-            height: 90px;
-            margin-bottom: 20px;
+            width: 90px; height: 90px;
             border-radius: 50%;
             border: 3px solid var(--primary);
-            padding: 5px;
-            background: rgba(0,0,0,0.5);
+            margin-bottom: 15px;
             box-shadow: var(--glow);
         }
 
-        /* কালারফুল টাইটেল */
         h1 {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             background: linear-gradient(45deg, #00d2ff, #00ff00, #ffcc00, #00d2ff);
-            background-size: 300% 300%;
+            background-size: 300%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 5px;
             animation: gradientText 6s infinite;
-            filter: drop-shadow(0 0 8px rgba(0,210,255,0.5));
         }
 
-        @keyframes gradientText {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+        @keyframes gradientText { 0%{background-position:0%} 100%{background-position:100%} }
 
-        .credit {
-            font-size: 0.8rem;
-            color: #ffcc00;
-            font-weight: bold;
-            margin-bottom: 30px;
-            display: block;
-            text-shadow: 0 0 5px #ffcc00;
-        }
-
-        .input-group {
-            margin-bottom: 25px;
-        }
+        .credit { color: #ffcc00; font-size: 0.8rem; margin-bottom: 20px; display: block; }
 
         input {
-            width: 100%;
-            padding: 16px 20px;
-            background: rgba(0, 0, 0, 0.6);
+            width: 100%; padding: 15px;
+            background: rgba(0,0,0,0.6);
             border: 2px solid #2d3748;
-            border-radius: 16px;
-            color: white;
-            font-size: 1.05rem;
-            outline: none;
-            transition: 0.3s;
+            border-radius: 12px;
+            color: #fff;
             text-align: center;
+            margin-bottom: 15px;
+            outline: none;
         }
 
-        input:focus {
-            border-color: var(--hack-green);
-            box-shadow: var(--hack-glow);
-        }
+        input:focus { border-color: var(--hack-green); box-shadow: var(--hack-glow); }
 
         button {
-            width: 100%;
-            padding: 16px;
+            width: 100%; padding: 15px;
             background: linear-gradient(45deg, var(--primary), var(--hack-green));
-            background-size: 200% 200%;
-            border: none;
-            border-radius: 16px;
-            color: black;
-            font-weight: bold;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: 0.3s;
+            border: none; border-radius: 12px;
+            font-weight: bold; cursor: pointer;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: var(--glow);
-            animation: gradientBtn 3s infinite alternate;
+            transition: 0.3s;
         }
 
-        @keyframes gradientBtn {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
+        button:hover { transform: scale(1.02); }
+
+        /* প্রোফাইল ইমেজ স্টাইল */
+        .profile-img {
+            width: 80px; height: 80px;
+            border-radius: 50%;
+            border: 2px solid var(--hack-green);
+            margin-bottom: 15px;
+            display: none; /* ডাটা আসলে ব্লক হবে */
         }
 
-        button:hover { transform: scale(1.02); box-shadow: var(--hack-glow); }
-        button:disabled { opacity: 0.6; cursor: not-allowed; animation: none; }
-
-        /* ডাটা লোডিং GIF */
-        .loading-gif {
-            display: none;
-            margin: 20px auto;
-            width: 60px;
-            height: 60px;
-        }
-
-        /* তথ্য প্রদর্শনের কার্ড */
         #result {
             display: none;
-            margin-top: 30px;
-            animation: resultFadeIn 0.6s ease-out;
-        }
-
-        @keyframes resultFadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-        .info-box {
-            background: rgba(0, 0, 0, 0.5);
+            margin-top: 25px;
+            text-align: left;
+            background: rgba(255,255,255,0.05);
             padding: 20px;
-            border-radius: 20px;
-            border: 1px solid #1a2a4a;
-            position: relative;
+            border-radius: 15px;
+            border-left: 4px solid var(--primary);
         }
 
-        /* কার্ডের পাশের ব্লু লাইনটি */
-        .info-box::after {
-            content: '';
-            position: absolute;
-            top: 20px; left: -2px; bottom: 20px;
-            width: 4px;
-            background: linear-gradient(to bottom, var(--primary), var(--secondary));
-            border-radius: 2px;
-            box-shadow: var(--glow);
-        }
+        .row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .label { color: #94a3b8; font-size: 0.85rem; }
+        .val { color: #fff; font-weight: bold; }
+        .val.name { color: var(--hack-green); }
 
-        .row {
-            display: flex;
-            justify-content: space-between;
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            align-items: center;
-        }
+        .social-row { display: flex; justify-content: center; gap: 20px; margin-top: 15px; }
+        .social-link { font-size: 1.5rem; transition: 0.3s; }
+        .social-link:hover { transform: translateY(-3px); }
 
-        .label { color: #94a3b8; font-size: 0.9rem; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;}
-        .val { color: #fff; font-weight: 500; font-size: 1.05rem; }
-        .val.name { color: var(--hack-green); font-weight: bold; text-shadow: 0 0 5px var(--hack-green); }
-
-        /* হোয়াটসঅ্যাপ এবং টেলিগ্রাম লিঙ্ক */
-        .social-row {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            margin-top: 18px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            padding-top: 18px;
-        }
-
-        .social-link {
-            font-size: 1.6rem;
-            transition: 0.3s;
-            filter: drop-shadow(0 0 5px currentColor);
-        }
-
-        .social-link:hover { transform: scale(1.2) translateY(-3px); filter: drop-shadow(0 0 10px currentColor); }
-
-        .contact-me {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-            margin-top: 30px;
-            color: var(--primary);
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: 0.3s;
-        }
-
-        .contact-me:hover { color: #fff; text-shadow: var(--glow); }
-
+        .loader-gif { display: none; width: 50px; margin: 15px auto; }
     </style>
 </head>
 <body>
 
     <div class="container">
         <img src="https://media.giphy.com/media/1is4K4y0oWyyGnWTSh/giphy.gif" alt="Logo" class="logo-gif">
-
-        <h1>Nambar Information</h1>
+        <h1>Number Information</h1>
         <span class="credit">Credit: SHADOW JOKER CTH</span>
 
-        <div class="input-group">
-            <input type="text" id="phoneInput" placeholder="Enter Number (+880...)">
-        </div>
+        <input type="text" id="phoneInput" placeholder="Enter Number (e.g. 017...)">
+        <button onclick="lookupNumber()" id="btnSubmit">Scan Number</button>
 
-        <button onclick="lookupNumber()" id="btnSubmit">
-            <i class="fa-solid fa-terminal"></i> Scan Number
-        </button>
-
-        <img src="https://media.giphy.com/media/QKDpE67Rc7rpjBmQPj/giphy.gif" alt="Loading" class="loading-gif" id="loader">
+        <img src="https://media.giphy.com/media/QKDpE67Rc7rpjBmQPj/giphy.gif" class="loader-gif" id="loader">
 
         <div id="result">
-            <div class="info-box">
-                <div class="row">
-                    <span class="label">Name:</span>
-                    <span id="resName" class="val name"></span>
-                </div>
-                <div class="row">
-                    <span class="label">Number:</span>
-                    <span id="resNum" class="val"></span>
-                </div>
-                <div class="row">
-                    <span class="label">Carrier:</span>
-                    <span id="resCarrier" class="val"></span>
-                </div>
-                <div class="row">
-                    <span class="label">Country:</span>
-                    <span id="resCountry" class="val"></span>
-                </div>
-                <div class="row">
-                    <span class="label">Location:</span>
-                    <span id="resLocation" class="val"></span>
-                </div>
-
-                <div class="social-row">
-                    <a id="waLink" href="#" target="_blank" class="social-link" style="color: #25d366;"><i class="fa-brands fa-whatsapp"></i></a>
-                    <a id="tgLink" href="#" target="_blank" class="social-link" style="color: #24A1DE;"><i class="fa-brands fa-telegram"></i></a>
-                </div>
+            <div style="text-align: center;">
+                <img id="resPhoto" src="" class="profile-img">
             </div>
+            <div class="row"><span class="label">Name:</span> <span id="resName" class="val name"></span></div>
+            <div class="row"><span class="label">Number:</span> <span id="resNum" class="val"></span></div>
+            <div class="row"><span class="label">Address:</span> <span id="resAddr" class="val"></span></div>
             
+            <div class="social-row">
+                <a id="waLink" href="#" target="_blank" class="social-link" style="color: #25d366;"><i class="fa-brands fa-whatsapp"></i></a>
+                <a id="tgLink" href="#" target="_blank" class="social-link" style="color: #24A1DE;"><i class="fa-brands fa-telegram"></i></a>
             </div>
+        </div>
 
-        <a href="https://t.me/SHADOW_JOKER_CTH" target="_blank" class="contact-me">
-            <i class="fa-brands fa-telegram"></i> Contact: @SHADOW_JOKER_CTH
+        <a href="https://t.me/SHADOW_JOKER_CTH" target="_blank" style="display:block; margin-top:20px; color:var(--primary); text-decoration:none; font-size:0.8rem;">
+            <i class="fa-brands fa-telegram"></i> Contact Admin
         </a>
     </div>
 
@@ -281,53 +163,50 @@
             const btn = document.getElementById('btnSubmit');
             const loader = document.getElementById('loader');
             const resultDiv = document.getElementById('result');
+            const resPhoto = document.getElementById('resPhoto');
 
             if (!num) return alert("দয়া করে একটি নাম্বার দিন!");
 
-            // UI State Change
             loader.style.display = "block";
             resultDiv.style.display = "none";
             btn.disabled = true;
-            btn.innerText = "Scanning...";
 
             try {
+                // আপনার FastAPI এন্ডপয়েন্ট কল করছে
                 const response = await fetch(`/api/check?number=${num}`);
                 const data = await response.json();
 
-                if (data && data.ok === true && data.results) {
-                    const info = data.results;
+                // এপিআই এর রেসপন্স কী (Key) অনুযায়ী এখানে ডাটা বসানো হচ্ছে
+                // আপনার এপিআই যদি অন্য ফরম্যাট দেয় তবে এগুলো পরিবর্তন করতে হবে
+                if (data && (data.name || data.status === "success")) {
                     
-                    // ডেটা পপুলেট করা
-                    document.getElementById('resName').innerText = info.name || "No Name Found";
-                    document.getElementById('resNum').innerText = info.international_format || info.number || num;
-                    document.getElementById('resCarrier').innerText = info.carrier || "N/A";
-                    document.getElementById('resCountry').innerText = info.country || "Bangladesh";
-                    document.getElementById('resLocation').innerText = info.location || "N/A";
-                    
-                    // সোশ্যাল লিঙ্ক হ্যান্ডেল করা
-                    if(info.social) {
-                        const waLink = document.getElementById('waLink');
-                        const tgLink = document.getElementById('tgLink');
-                        
-                        waLink.href = info.social.whatsapp || "#";
-                        tgLink.href = info.social.telegram || "#";
-                        
-                        // যদি লিঙ্ক না থাকে তাহলে আইকনগুলো হাইড করা যেতে পারে
-                        if (!info.social.whatsapp) waLink.style.display = "none"; else waLink.style.display = "inline-block";
-                        if (!info.social.telegram) tgLink.style.display = "none"; else tgLink.style.display = "inline-block";
+                    document.getElementById('resName').innerText = data.name || "N/A";
+                    document.getElementById('resNum').innerText = data.number || num;
+                    document.getElementById('resAddr').innerText = data.address || "No Info Found";
+
+                    // যদি ছবি থাকে
+                    if (data.photo) {
+                        resPhoto.src = data.photo;
+                        resPhoto.style.display = "inline-block";
+                    } else {
+                        resPhoto.style.display = "none";
                     }
+
+                    // সোশ্যাল লিঙ্ক জেনারেশন
+                    const cleanNum = num.replace(/\D/g, ''); // শুধু ডিজিট রাখা
+                    document.getElementById('waLink').href = `https://wa.me/${cleanNum}`;
+                    document.getElementById('tgLink').href = `https://t.me/SHADOW_JOKER_CTH`; // অথবা ডাইনামিক
 
                     resultDiv.style.display = "block";
                 } else {
-                    alert("কোনো তথ্য পাওয়া যায়নি! (or API Error)");
+                    alert("তথ্য পাওয়া যায়নি বা এপিআই এরর!");
                 }
             } catch (err) {
-                alert("সার্ভার এরর! আবার চেষ্টা করুন।");
+                alert("সার্ভার কানেকশন এরর!");
                 console.error(err);
             } finally {
                 loader.style.display = "none";
                 btn.disabled = false;
-                btn.innerText = "Scan Number";
             }
         }
     </script>
